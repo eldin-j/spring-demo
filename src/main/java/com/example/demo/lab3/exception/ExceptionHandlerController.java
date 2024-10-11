@@ -1,4 +1,4 @@
-package com.example.demo.lab3;
+package com.example.demo.lab3.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,29 +17,5 @@ public class ExceptionHandlerController {
     public ResponseEntity<ErrorResponse> handleCustomException(CustomException ex) {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-}
-
-class CustomException extends RuntimeException {
-    public CustomException(String message) {
-        super(message);
-    }
-}
-
-class ErrorResponse {
-    private int status;
-    private String message;
-
-    public ErrorResponse(int status, String message) {
-        this.status = status;
-        this.message = message;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public String getMessage() {
-        return message;
     }
 }

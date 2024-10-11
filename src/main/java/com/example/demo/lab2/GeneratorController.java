@@ -14,7 +14,7 @@ public class GeneratorController {
 
     @GetMapping("/api/generate")
     public String generateNumbers(@RequestParam int n) {
-        return IntStream.rangeClosed(1, n)
+        return IntStream.range(1, n + 1)
                 .mapToObj(Integer::toString)
                 .collect(Collectors.joining(", "));
     }
