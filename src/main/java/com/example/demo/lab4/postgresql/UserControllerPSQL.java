@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,6 +21,21 @@ public class UserControllerPSQL {
     public ResponseEntity<UserPSQL> addUserPSQL(@Valid @RequestBody UserPSQL newUser) {
         UserPSQL savedUser = userRepositoryPSQL.save(newUser);
         return ResponseEntity.ok(savedUser);
+    }
+
+    @GetMapping
+    public List<UserPSQL> getAllUsersPSQL() {
+        return userRepositoryPSQL.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserPSQL> getUserByIdPSQL(@PathVariable Long id) {
+        Optional<UserPSQL> user = userRepositoryPSQL.findById(id);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{id}")
